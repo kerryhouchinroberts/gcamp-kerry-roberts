@@ -1,12 +1,15 @@
-<h1 class=page-header id="top">Frequently Asked Questions</h1>
+<h1 class="page-header" id="top">Frequently Asked Questions</h1>
 
   <% @CommonQuestions.each do |x| %>
   <ul> <li><%= link_to x.question, "##{x.slug}" %> </li> </ul>
   <% end %>
 
-
+  <div class="row">
+    <div class="col-md-6">
   <% @CommonQuestions.each do |x| %>
   <h3 id="<%= x.slug %>"><%= x.question %></h3>
   <p><%= x.answer %></p>
   <p><%= link_to "top", "#top" %></p>
   <% end %>
+</div>
+</div>
