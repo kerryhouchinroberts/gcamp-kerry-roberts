@@ -24,19 +24,20 @@
     </div>
   </nav>
 
+<div class="container">
 <%= yield %>
       <hr>
 
       <footer>
         <div class="row">
           <div class="col-md-6">
-            <a href="/about">About</a>
+            <%= link_to "About", about_path %>
             |
-            <a href="/terms">Terms</a>
+            <%= link_to "Terms", terms_path %>
             |
-            <a href="/faq">FAQ</a>
+            <%= link_to "FAQ", faq_path %>
             |
-            <a href="/tasks">Tasks</a>
+            <%= link_to "Tasks", tasks_path %>
           </div>
 
           <div class="col-md-6 text-right">
