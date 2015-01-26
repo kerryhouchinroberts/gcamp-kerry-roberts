@@ -6,7 +6,4 @@ class WelcomeController < ApplicationController
  def terms
  end
 
- def tasks
- end
-
 end
