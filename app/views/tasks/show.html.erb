@@ -1,9 +1,15 @@
-<p id="notice"><%= notice %></p>
+<div class=alert-success align=center><p id="notice"><%= notice %></p></div>
 
-<p>
-  <strong>Description:</strong>
+<div class=page-header>
+  <div class="pull-right">
+    <%= link_to 'Edit', edit_task_path(@task), class:"btn btn-info" %>
+  </div>
+  <h1>
   <%= @task.description %>
-</p>
+  </h1>
+</div>
 
-<%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+<ol class="breadcrumb">
+  <li><a href="/tasks">Tasks</a></li>
+  <li class="active"><%= @task.description %></li>
+</ol>
