@@ -16,11 +16,21 @@
 
   <div class="form-group">
 
-    <label class="control-label col-md-2"><%= f.label :description %>
+    <label class="control-label col-md-2">
+      <%= f.label :description %>
      </label>
      <div class="form-controls col-md-4">
-       <input class="form-control" <%= f.text_field :description  %>
+      <%= f.text_field :description, :class =>'form-control' %>
      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-md-2">
+        <%= f.label :due_date %>
+      </label>
+      <div class="form-controls col-md-4">
+        <%= f.date_select :due_date, :class => 'form-control' %>
+      </div>
     </div>
 
   <div class="form-group">
@@ -31,4 +41,7 @@
   </div>
 </div>
 </div>
+
+
+
 <% end %>
