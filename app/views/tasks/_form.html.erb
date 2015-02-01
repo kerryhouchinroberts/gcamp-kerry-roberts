@@ -18,13 +18,13 @@
 
     <label class="control-label col-md-2">
       <%= f.label :description %>
-     </label>
-     <div class="form-controls col-md-4">
+    </label>
+      <div class="form-controls col-md-4">
       <%= f.text_field :description, :class =>'form-control' %>
-     </div>
-    </div>
+      </div>
+  </div>
 
-<% unless @task.id == nil %>
+
     <div class="form-group">
       <label class="control-label col-md-2">
         <%= f.label :due_date %>
@@ -34,6 +34,7 @@
       </div>
     </div>
 
+<% unless @task.id == nil %>
     <div class="form-group">
       <label class="control-label col-md-2">
         <%= f.label :completed %>
