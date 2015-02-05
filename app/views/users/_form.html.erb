@@ -31,7 +31,10 @@
 <div class="actions">
 <div class="col-md-offset-2 col-md-4">
   <input class="btn btn-primary"<%= f.submit %>
-  <%= link_to 'cancel', tasks_path, class:"btn btn-default" %>
+  <% unless @user.id == nil %>
+  <%= link_to 'Delete User', @user, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
+  <% end %>
+  <%= link_to 'Cancel', users_path, class:"btn btn-default" %>
 </div>
 </div>
 </div>
