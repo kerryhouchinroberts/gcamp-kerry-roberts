@@ -33,6 +33,7 @@ class ProjectsController < ApplicationController
     if @project.update_attributes(project_params)
       redirect_to project_path(@project), notice: 'Project was successfully updated.'
     else
+      flash.now[:alert] = @project.errors.full_messages
       render :edit
     end
   end
