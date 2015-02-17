@@ -22,6 +22,7 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to users_path, notice: 'User was successfully created.'
     else
+      flash.now[:alert] = @user.errors.full_messages
       render :new
     end
   end
@@ -32,6 +33,7 @@ class UsersController < ApplicationController
     if @user.update_attributes(user_params)
       redirect_to users_path, notice: 'User was successfully edited.'
     else
+      flash.now[:alert] = @user.errors.full_messages
       render :edit
     end
   end
