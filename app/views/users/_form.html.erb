@@ -1,13 +1,5 @@
 <% if flash.now[:alert] %>
-<div id="error_explanation" class = "alert alert-danger col-md-offset-2">
-  <h2><%= pluralize(@user.errors.count, "error") %> prohibited this form from being saved:</h2>
-
-  <ul>
-    <% @user.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
+<%= render partial: "shared/errors", locals: {table: @user} %>
 <% end %>
 
 <%= form_for(@user, html: {class: "form-horizontal"}) do |f| %>
