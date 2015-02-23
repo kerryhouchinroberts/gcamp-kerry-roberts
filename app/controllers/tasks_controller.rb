@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate
   # GET /tasks
   # GET /tasks.json
   def index
@@ -71,4 +71,9 @@ class TasksController < ApplicationController
     def task_params
       params.require(:task).permit(:description, :due_date, :completed)
     end
+    
+    def authenticate
+      redirect_to '/sign-in' unless current_user
+    end
+
 end

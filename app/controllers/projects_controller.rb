@@ -1,5 +1,7 @@
 class ProjectsController < ApplicationController
 
+  before_action :authenticate
+
   def index
     @projects = Project.all
   end
@@ -49,4 +51,9 @@ class ProjectsController < ApplicationController
   def project_params
     params.require(:project).permit(:name)
   end
+
+  def authenticate
+    redirect_to '/sign-in' unless current_user
+  end
+
 end
