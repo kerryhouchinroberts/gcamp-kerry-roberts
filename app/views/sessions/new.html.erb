@@ -2,7 +2,13 @@
   <div class ="well col-md-offset-4 col-md-4">
     <h1>Sign into gCamp</h1>
 
-    <%= form_tag '/login' do %>
+    <% if @sign_in_error.present? %>
+      <ul>
+          <li class="text-danger"><%= @sign_in_error %></li>
+      </ul>
+    <% end %>
+
+    <%= form_tag '/sign-in' do %>
       <div class ="form-group">
         <label>
           <%= label_tag :email %>
