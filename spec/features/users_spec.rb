@@ -3,15 +3,25 @@ require 'rails_helper'
 
 describe 'User can CRUD users' do
 
+  before(:each) do
+    @user = User.create(first_name: 'first', last_name: 'last', email: 'firstlast@email.com', password: 'pass')
+    visit '/sign-in'
+    fill_in 'email', :with => 'firstlast@email.com'
+    fill_in 'password', :with => 'pass'
+    click_button "Sign In"
+  end
+
   scenario 'User can create a user' do
 
     visit '/users'
 
     click_on "New User"
 
-    fill_in 'user_first_name', :with => "Kerry"
-    fill_in 'user_last_name', :with => "Roberts"
-    fill_in 'user_email', :with => "email@example.com"
+    fill_in 'user_first_name', :with => 'Kerry'
+    fill_in 'user_last_name', :with => 'Roberts'
+    fill_in 'user_email', :with => 'email@example.com'
+    fill_in 'user_password', :with => 'password'
+    fill_in 'user_password_confirmation', :with => 'password'
 
     click_on "Create User"
 
@@ -21,7 +31,6 @@ describe 'User can CRUD users' do
 
 
     scenario 'User can view a show page for a user' do
-      @user = User.create(first_name: "Cool", last_name: "dude", email: "cooldude@aol.com")
 
       visit "/users/#{@user.id}"
 
@@ -30,7 +39,6 @@ describe 'User can CRUD users' do
     end
 
     scenario 'User can edit a user' do
-      @user = User.create(first_name: "Cool", last_name: "dude", email: "cooldude@aol.com")
 
       visit "/users/#{@user.id}/edit"
 
@@ -45,7 +53,6 @@ describe 'User can CRUD users' do
     end
 
     scenario 'User can delete a user from the edit page' do
-      @user = User.create(first_name: "Cool", last_name: "dude", email: "cooldude@aol.com")
 
       visit "/users/#{@user.id}/edit"
 
@@ -55,7 +62,6 @@ describe 'User can CRUD users' do
     end
 
     scenario 'User can delete a user from the users index' do
-      @user = User.create(first_name: "Cool", last_name: "dude", email: "cooldude@aol.com")
 
       visit "/users"
 
