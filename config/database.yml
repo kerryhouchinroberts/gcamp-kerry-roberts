@@ -8,3 +8,8 @@ development:
 test:
  <<: *default
  database: gcamp_test
+
+test:
+  adapter: postgresql
+  database: travis_ci_test
+  username: postgres
