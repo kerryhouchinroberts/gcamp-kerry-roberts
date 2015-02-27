@@ -13,3 +13,5 @@ rails s
 
 * Ruby version
   2.2.0
+
+![](https://travis-ci.org/kerryhouchinroberts/gcamp-kerry-roberts.svg?branch=master)
