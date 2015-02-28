@@ -12,3 +12,14 @@
   <%= @project.name %>
   </h1>
 </div>
+
+<ol class="breadcrumb">
+  <li><%= link_to "Projects", projects_path %></li>
+  <li class="active"><%= @project.name %></li>
+</ol>
+
+<div>
+  <%= content_tag :p, :class => 'text-left' do %>
+  <%= link_to("#{@project.tasks.count} Tasks", project_tasks_path(@project)) %>
+  <% end %>
+</div>
