@@ -1,4 +1,4 @@
-<%= form_for(@task, html: {class: "form-horizontal"}) do |f| %>
+<%= form_for([@project,@task], html: {class: "form-horizontal"}) do |f| %>
   <% if @task.errors.any? %>
     <%= render partial: "shared/errors", locals: {table: @task} %>
   <% end %>
@@ -37,7 +37,7 @@
   <div class="actions">
     <div class="col-md-offset-2 col-md-4">
       <input class="btn btn-primary"<%= f.submit %>
-      <%= link_to 'cancel', tasks_path, class:"btn btn-default" %>
+      <%= link_to 'cancel', project_tasks_path(@project), class:"btn btn-default" %>
     </div>
   </div>
 </div>
