@@ -19,7 +19,5 @@
 </ol>
 
 <div>
-  <%= content_tag :p, :class => 'text-left' do %>
-  <%= link_to("#{@project.tasks.count} Tasks", project_tasks_path(@project)) %>
-  <% end %>
+  <%= link_to "#{@project.tasks.count} Task".pluralize(@project.tasks.count) , project_tasks_path(@project) %>
 </div>
