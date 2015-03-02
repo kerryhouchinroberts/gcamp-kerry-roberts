@@ -23,14 +23,14 @@
       <th>Description</th>
       <th>Complete</th>
       <th class="text-left">Due On</th>
-      <th></th> 
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @project.tasks.each do |task| %>
       <tr>
-        <td><%= link_to task.description, project_task_path(@project, task)%></td>
+        <td><%= task.description %></td>
         <td><%= task.completed %></td>
         <td><%= task.change_date %></td>
         <td class="text-right">

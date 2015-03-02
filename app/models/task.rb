@@ -5,7 +5,7 @@ class Task < ActiveRecord::Base
   validates :description, presence: true
 
   def change_date
-    due_date.strftime('%Y/%m/%d')
+    due_date.strftime('%-m/%d/%Y')
   end
 
 end
