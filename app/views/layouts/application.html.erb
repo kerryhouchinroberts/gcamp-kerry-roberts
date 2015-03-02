@@ -8,64 +8,64 @@
 </head>
 <body>
 
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-
-        </button>
-        <a class="navbar-brand" href="#">gCamp</a>
-      </div>
-        <ul class="nav navbar-nav navbar-right">
-          <% if current_user %>
-            <li><%= link_to current_user.full_name, user_path(current_user.id) %></li>
-            <li><%= link_to "Sign Out", signout_path %></li>
-          <% else %>
-            <li><%= link_to "Sign Up", signup_path %></li>
-            <li><%= link_to "Sign In", signin_path %></li>
-          <% end %>
-        </ul>
-      <div id="navbar" class="navbar-collapse collapse">
-      </div><!--/.navbar-collapse -->
-      </div>
-  </nav>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+      </button>
+      <%= link_to "gCamp", root_path, class:"navbar-brand"%>
+    </div>
+      <ul class="nav navbar-nav navbar-right">
+        <% if current_user %>
+          <li><%= link_to current_user.full_name, user_path(current_user.id) %></li>
+          <li><%= link_to "Sign Out", signout_path %></li>
+        <% else %>
+          <li><%= link_to "Sign Up", signup_path %></li>
+          <li><%= link_to "Sign In", signin_path %></li>
+        <% end %>
+      </ul>
+    <div id="navbar" class="navbar-collapse collapse">
+    </div><!--/.navbar-collapse -->
+    </div>
+</nav>
 
 <div class="container">
 
 
 <%= yield %>
 </body>
-      <footer>
-        <div class="row">
-          <div class="col-md-6">
-            <%= link_to "About", about_path %>
-            |
-            <%= link_to "Terms", terms_path %>
-            |
-            <%= link_to "FAQ", faq_path %>
-            |
-            <%= link_to "Users", users_path %>
-            |
-            <%= link_to "Projects", projects_path %>
-          </div>
 
-          <div class="col-md-6 text-right">
-            <%= link_to image_tag('linked_in-f852478f8950eb3fca3367cb545aaa52.jpg', alt: "LinkedIn", class: "img-footer"), "http://www.linkedin.com/in/khroberts/" %>
-            <%= link_to image_tag('GitHub-de8164cc6a609537cfdab331e002ebb3.png', alt: "GitHub", class: "img-footer"), "https://github.com/kerryhouchinroberts" %>
-            <%= link_to image_tag('Twitter-0c8c529fb7181e05ab5c30416e3a70fa.png', alt: "Twitter", class: "img-footer"), "https://twitter.com/kerryhouchin" %>
-            <%= link_to image_tag('galvanize-g-b3da24895ed7d4fd33c43d9226c16242.png', alt: "Galvanize g", class: "img-footer"), "https://students.gschool.it/students/213" %>
-          </div>
-          </div>
-      </footer>
-    </div> <!-- /container -->
+    <footer>
+      <div class="row">
+        <div class="col-md-6">
+          <%= link_to "About", about_path %>
+          |
+          <%= link_to "Terms", terms_path %>
+          |
+          <%= link_to "FAQ", faq_path %>
+          |
+          <%= link_to "Users", users_path %>
+          |
+          <%= link_to "Projects", projects_path %>
+        </div>
+
+        <div class="col-md-6 text-right">
+          <%= link_to image_tag('linked_in-f852478f8950eb3fca3367cb545aaa52.jpg', alt: "LinkedIn", class: "img-footer"), "http://www.linkedin.com/in/khroberts/" %>
+          <%= link_to image_tag('GitHub-de8164cc6a609537cfdab331e002ebb3.png', alt: "GitHub", class: "img-footer"), "https://github.com/kerryhouchinroberts" %>
+          <%= link_to image_tag('Twitter-0c8c529fb7181e05ab5c30416e3a70fa.png', alt: "Twitter", class: "img-footer"), "https://twitter.com/kerryhouchin" %>
+          <%= link_to image_tag('galvanize-g-b3da24895ed7d4fd33c43d9226c16242.png', alt: "Galvanize g", class: "img-footer"), "https://students.gschool.it/students/213" %>
+        </div>
+        </div>
+    </footer>
+  </div> <!-- /container -->
 
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-  </html>
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="../../dist/js/bootstrap.min.js"></script>
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+</html>
