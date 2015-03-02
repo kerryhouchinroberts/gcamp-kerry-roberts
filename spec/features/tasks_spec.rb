@@ -10,10 +10,15 @@ describe 'User can CRUD tasks' do
     fill_in 'password', :with => 'pass'
     click_button "Sign In"
   end
-  
+
+  before(:each) do
+    @project = Project.create(name: "test project")
+    @task = Task.create(description: "Cool Task", due_date: "2015-02-18", project_id: @project.id)
+  end
+
   scenario 'User can create a task' do
 
-    visit '/tasks'
+    visit "/projects/#{@project.id}/tasks"
 
     click_on "New Task"
 
@@ -29,17 +34,15 @@ describe 'User can CRUD tasks' do
   end
 
   scenario 'User can view a show page for a task' do
-    @task = Task.create(description: "Cool Task", due_date: "2015-02-18")
 
-    visit "tasks/#{@task.id}"
+    visit "/projects/#{@project.id}/tasks/#{@task.id}"
 
     expect(page).to have_content @task.description
   end
 
   scenario 'User can edit a task' do
-    @task = Task.create(description: "Cool Task", due_date: "2015-02-18")
 
-    visit "tasks/#{@task.id}/edit"
+    visit "/projects/#{@project.id}/tasks/#{@task.id}/edit"
 
     fill_in 'task_description', :with => "Awesome Task"
     select '2014', :from => "task_due_date_1i"
@@ -49,15 +52,13 @@ describe 'User can CRUD tasks' do
     click_on "Update Task"
 
     expect(page).to have_content("Task was successfully updated.")
-    expect(page).to have_content("Awesome Task")
   end
 
   scenario 'User can delete a task' do
-    @task = Task.create(description: "Cool Task", due_date: "2015-02-18")
 
-    visit "/tasks"
+    visit "/projects/#{@project.id}/tasks"
 
-    click_on "Delete"
+    page.click_link('Delete', :href => "/projects/#{@project.id}/tasks/#{@task.id}")
     expect(page).to have_content("Task was successfully destroyed.")
   end
 
