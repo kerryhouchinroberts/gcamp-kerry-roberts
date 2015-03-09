@@ -13,14 +13,16 @@
 </ol>
 
 <%= form_for([@project, @membership], html: {class: "well form-inline"}) do |f| %>
+  <div class="form-group">
+    <%= f.collection_select(:user_id, User.all, :id, :full_name, {include_blank: "Please select a user..."},{class: "form-control"}) %>
+    <%= f.select(:role, Membership.roles.keys.map {|role| [role.titleize,role]}, {include_blank: false}, {class: "form-control"}) %>
+    <input class="btn btn-primary"
+      <%= f.submit "Add New Member" %>
+    </input>
+  </div>
+<% end %>
 
-<div class="form-group">
-  <%= f.collection_select(:user_id, User.all, :id, :full_name, {include_blank: "Please select a user..."},{class: "form-control"}) %>
-  <%= f.select(:role, Membership.roles.keys.map {|role| [role.titleize,role]}, {include_blank: false}, {class: "form-control"}) %>
-  <input class="btn btn-primary"
-    <%= f.submit "Add New Member" %>
-  </input>
-</div>
-
-
+<% @project.users.each do |member| %>
+  <%= link_to member.full_name, user_path(member) %>
+  <br />
 <% end %>
