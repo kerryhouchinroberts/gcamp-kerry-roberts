@@ -13,18 +13,27 @@
 </ol>
 
 <% if flash.now[:alert] %>
-  <%= render partial: "shared/errors", locals: {table: @membership} %>
-<% end %>
+  <div id="error_explanation" class="alert alert-danger">
+    <h4><%= pluralize(@membership.errors.count, "error") %> prohibited this form from being saved:</h4>
 
-  <div class="form-group">
-    <%= form_for([@project, @membership], html: {class: "well form-inline"}) do |f| %>
-    <%= f.collection_select(:user_id, User.all, :id, :full_name, {include_blank: "Please select a user..."},{class: "form-control"}) %>
-    <%= f.select(:role, Membership.roles.keys.map {|role| [role.titleize,role]}, {include_blank: false}, {class: "form-control"}) %>
-    <input class="btn btn-primary"
-      <%= f.submit "Add New Member" %>
-    </input>
+    <ul>
+    <% @membership.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
   </div>
 <% end %>
+
+<div class="form-group">
+  <%= form_for([@project, @membership], html: {class: "well form-inline"}) do |f| %>
+  <%= f.collection_select(:user_id, User.all, :id, :full_name, {include_blank: "Please select a user..."},{class: "form-control"}) %>
+  <%= f.select(:role, Membership.roles.keys.map {|role| [role.titleize,role]}, {include_blank: false}, {class: "form-control"}) %>
+  <input class="btn btn-primary"
+    <%= f.submit "Add New Member" %>
+  </input>
+  <% end %>
+</div>
+
 
 <% @project.users.each do |member| %>
   <%= link_to member.full_name, user_path(member) %>
