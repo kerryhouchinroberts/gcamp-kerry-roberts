@@ -20,4 +20,6 @@
 
 <div>
   <%= link_to "#{@project.tasks.count} Task".pluralize(@project.tasks.count) , project_tasks_path(@project) %>
+  <br />
+  <%= link_to "#{@project.memberships.count} Member".pluralize(@project.memberships.count), project_memberships_path(@project) %>
 </div>
