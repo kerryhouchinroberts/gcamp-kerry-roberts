@@ -12,8 +12,12 @@
   <li class="active">Memberships</li>
 </ol>
 
-<%= form_for([@project, @membership], html: {class: "well form-inline"}) do |f| %>
+<% if flash.now[:alert] %>
+  <%= render partial: "shared/errors", locals: {table: @membership} %>
+<% end %>
+
   <div class="form-group">
+    <%= form_for([@project, @membership], html: {class: "well form-inline"}) do |f| %>
     <%= f.collection_select(:user_id, User.all, :id, :full_name, {include_blank: "Please select a user..."},{class: "form-control"}) %>
     <%= f.select(:role, Membership.roles.keys.map {|role| [role.titleize,role]}, {include_blank: false}, {class: "form-control"}) %>
     <input class="btn btn-primary"
