@@ -6,36 +6,38 @@
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-      </button>
-      <%= link_to "gCamp", root_path, class:"navbar-brand"%>
-    </div>
-      <ul class="nav navbar-nav navbar-right">
-        <% if current_user %>
-          <li><%= link_to current_user.full_name, user_path(current_user.id) %></li>
-          <li><%= link_to "Sign Out", signout_path %></li>
-        <% else %>
-          <li><%= link_to "Sign Up", signup_path %></li>
-          <li><%= link_to "Sign In", signin_path %></li>
-        <% end %>
-      </ul>
-    <div id="navbar" class="navbar-collapse collapse">
-    </div><!--/.navbar-collapse -->
-    </div>
-</nav>
-
 <div class="container">
+  <body>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+        </button>
+        <%= link_to "gCamp", root_path, class:"navbar-brand"%>
+      </div>
+        <ul class="nav navbar-nav navbar-right">
+          <% if current_user %>
+            <li><%= link_to current_user.full_name, user_path(current_user.id) %></li>
+            <li><%= link_to "Sign Out", signout_path %></li>
+          <% else %>
+            <li><%= link_to "Sign Up", signup_path %></li>
+            <li><%= link_to "Sign In", signin_path %></li>
+          <% end %>
+        </ul>
+      <div id="navbar" class="navbar-collapse collapse">
+      </div><!--/.navbar-collapse -->
+      </div>
+  </nav>
 
 
-<%= yield %>
-</body>
 
+
+  <%= yield %>
+  </body>
+</div>
+  <div class="container">
     <footer>
       <div class="row">
         <div class="col-md-6">

@@ -15,27 +15,35 @@
 <% if flash.now[:alert] %>
   <div id="error_explanation" class="alert alert-danger">
     <h4><%= pluralize(@membership.errors.count, "error") %> prohibited this form from being saved:</h4>
-
     <ul>
-    <% @membership.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
+      <% @membership.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
     </ul>
   </div>
 <% end %>
 
-<div class="form-group">
-  <%= form_for([@project, @membership], html: {class: "well form-inline"}) do |f| %>
-  <%= f.collection_select(:user_id, User.all, :id, :full_name, {include_blank: "Please select a user..."},{class: "form-control"}) %>
-  <%= f.select(:role, Membership.roles.keys.map {|role| [role.titleize,role]}, {include_blank: false}, {class: "form-control"}) %>
-  <input class="btn btn-primary"
-    <%= f.submit "Add New Member" %>
-  </input>
+<div class="well form-inline col-md-8">
+  <%= form_for([@project, @membership]) do |f| %>
+    <%= f.collection_select(:user_id, User.all, :id, :full_name, {include_blank: "Please select a user..."},{class: "form-control"}) %>
+    <%= f.select(:role, Membership.roles.keys.map {|role| [role.titleize,role]}, {include_blank: false}, {class: "form-control"}) %>
+    <%= f.submit "Add New Member", class: "input btn btn-primary" %>
   <% end %>
 </div>
 
+<div class="row form-inline col-md-8">
+  <% @project.memberships.each do |member| %>
+    <div class="row form-group col-md-6 member">
+    <%= link_to member.user.full_name, user_path(member.user_id) %>
+    </div>
 
-<% @project.users.each do |member| %>
-  <%= link_to member.full_name, user_path(member) %>
-  <br />
-<% end %>
+    <%= form_for [@project, member], method: :put do |f| %>
+    <div class="form-group member">
+      <%= f.select(:role, Membership.roles.keys.map {|role| [role.titleize,role]}, {include_blank: false}, {class: "form-control"}) %>
+        <%= f.submit "Update", class: "input btn btn-primary" %>
+      <%= link_to '', project_membership_path(@project, member), method: :delete, data: { confirm: 'Are you sure?' }, class: "glyphicon glyphicon-remove" %>
+    </div>
+
+      <% end %>
+    <% end %>
+</div>
