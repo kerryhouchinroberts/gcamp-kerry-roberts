@@ -1,5 +1,5 @@
 <% if flash[:notice] %>
-<div class = "alert alert-success"><%= flash[:notice] %></div>
+  <div class = "alert alert-success"><%= flash[:notice] %></div>
 <% end %>
 
 <div class="page-header">
@@ -34,7 +34,7 @@
 <div class="row form-inline col-md-8">
   <% @project.memberships.each do |member| %>
     <div class="row form-group col-md-6 member">
-    <%= link_to member.user.full_name, user_path(member.user_id) %>
+      <%= link_to member.user.full_name, user_path(member.user_id) %>
     </div>
 
     <%= form_for [@project, member], method: :put do |f| %>
@@ -43,7 +43,7 @@
         <%= f.submit "Update", class: "input btn btn-primary" %>
       <%= link_to '', project_membership_path(@project, member), method: :delete, data: { confirm: 'Are you sure?' }, class: "glyphicon glyphicon-remove" %>
     </div>
-
       <% end %>
-    <% end %>
+      
+  <% end %>
 </div>
