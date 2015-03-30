@@ -11,23 +11,23 @@ describe 'User can CRUD users' do
     click_button "Sign In"
   end
 
-  scenario 'User can create a user' do
+    scenario 'User can create a user' do
 
-    visit '/users'
+      visit '/users'
 
-    click_on "New User"
+      click_on "New User"
 
-    fill_in 'user_first_name', :with => 'Kerry'
-    fill_in 'user_last_name', :with => 'Roberts'
-    fill_in 'user_email', :with => 'email@example.com'
-    fill_in 'user_password', :with => 'password'
-    fill_in 'user_password_confirmation', :with => 'password'
+      fill_in 'user_first_name', :with => 'Kerry'
+      fill_in 'user_last_name', :with => 'Roberts'
+      fill_in 'user_email', :with => 'email@example.com'
+      fill_in 'user_password', :with => 'password'
+      fill_in 'user_password_confirmation', :with => 'password'
 
-    click_on "Create User"
+      click_on "Create User"
 
-    expect(page).to have_content("User was successfully created.")
-    expect(page).to have_content("Roberts")
-  end
+      expect(page).to have_content("User was successfully created.")
+      expect(page).to have_content("Roberts")
+    end
 
 
     scenario 'User can view a show page for a user' do
@@ -58,7 +58,7 @@ describe 'User can CRUD users' do
 
       click_on "Delete User"
 
-      expect(page).to have_content("User was successfully destroyed.")
+      expect(page).to have_content("Sign into gCamp")
     end
 
     scenario 'User can delete a user from the users index' do
@@ -67,6 +67,6 @@ describe 'User can CRUD users' do
 
       click_on "Delete"
 
-      expect(page).to have_content("User was successfully destroyed.")
+      expect(page).to have_content("Sign into gCamp")
     end
 end

@@ -92,4 +92,30 @@ describe 'User can sign up with valid information' do
     expect(page).to have_content("Password confirmation doesn't match Password")
   end
 
+  scenario 'User cannot sign up with an email address that already exists in database' do
+
+    visit '/sign-up'
+
+    fill_in 'user_first_name', :with => "Chewbacca"
+    fill_in 'user_last_name', :with => "Wookie"
+    fill_in 'user_email', :with => "chewy@theforce.com"
+    fill_in 'user_password', :with => "r2d2"
+    fill_in 'user_password_confirmation', :with => "r2d2"
+
+    click_button "Sign Up"
+    click_on 'Sign Out'
+
+    visit '/sign-up'
+
+    fill_in 'user_first_name', :with => "Chewbacca"
+    fill_in 'user_last_name', :with => "Wookie"
+    fill_in 'user_email', :with => "chewy@theforce.com"
+    fill_in 'user_password', :with => "r2d2"
+    fill_in 'user_password_confirmation', :with => "r2d2"
+
+    click_button "Sign Up"
+
+    expect(page).to have_content("Email has already been taken")
+  end
+
 end
