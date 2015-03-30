@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  before_action :authenticate
+
   def index
     @users = User.all
   end
@@ -48,6 +50,10 @@ class UsersController < ApplicationController
   private
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :password)
+  end
+
+  def authenticate
+    redirect_to '/sign-in' unless current_user
   end
 
 end
