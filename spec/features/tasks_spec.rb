@@ -58,7 +58,7 @@ describe 'User can CRUD tasks' do
 
     visit "/projects/#{@project.id}/tasks"
 
-    page.click_link('Delete', :href => "/projects/#{@project.id}/tasks/#{@task.id}")
+    page.click_link('', :href => "/projects/#{@project.id}/tasks/#{@task.id}")
     expect(page).to have_content("Task was successfully destroyed.")
   end
 
