@@ -30,11 +30,11 @@
   <tbody>
     <% @project.tasks.each do |task| %>
       <tr>
-        <td><%= task.description %></td>
+        <td><%= link_to task.description, project_task_path(@project, task) %> <span class="badge"><%= task.comments.count %></span></td>
         <td><%= task.completed %></td>
         <td><%= task.change_date %></td>
         <td class="text-right">
-        <%= link_to 'Show', project_task_path(@project, task), class:"btn btn-success"%>
+        <!-- <%= link_to 'Show', project_task_path(@project, task), class:"btn btn-success"%> -->
         <%= link_to 'Edit', edit_project_task_path(@project, task), class:"btn btn-info" %>
         <%= link_to '', project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?' }, class:"glyphicon glyphicon-remove" %>
         </td>
