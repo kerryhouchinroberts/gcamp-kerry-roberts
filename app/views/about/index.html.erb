@@ -10,3 +10,10 @@
     <p>Human collaboration and communication is what drives us, and it infuses every feature of gCamp.</p>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-md-6">
+    <p><strong>gCamp is extremely active. Check out our killer stats below! <br />
+          <%= pluralize(Project.all.count, "Project") %>, <%= pluralize(Task.all.count, "Task") %>, <%= pluralize(Membership.all.count, "Project Member") %>, <%= pluralize(User.all.count, "User") %>, <%= pluralize(Comment.all.count, "Comment") %></strong></p>
+  </div>
+</div>
