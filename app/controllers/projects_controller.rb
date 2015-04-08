@@ -53,7 +53,10 @@ class ProjectsController < ApplicationController
   end
 
   def authenticate
-    redirect_to '/sign-in' unless current_user
+    unless current_user
+      session[:return_to] = request.fullpath
+      redirect_to '/sign-in'
+    end
   end
 
 end

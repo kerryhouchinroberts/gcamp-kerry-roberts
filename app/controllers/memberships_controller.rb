@@ -1,5 +1,7 @@
 class MembershipsController < ApplicationController
 
+  before_action :authenticate
+
   def index
     @memberships = Membership.all
     @project = Project.find(params[:project_id])
@@ -39,6 +41,13 @@ class MembershipsController < ApplicationController
   private
   def membership_params
     params.require(:membership).permit(:role, :project_id, :user_id)
+  end
+
+  def authenticate
+    unless current_user
+      session[:return_to] = request.fullpath
+      redirect_to '/sign-in'
+    end
   end
 
 end
