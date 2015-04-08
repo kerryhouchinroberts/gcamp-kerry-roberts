@@ -43,6 +43,10 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
    if  @user.destroy
+    @user.comments.map do |comment|
+      comment.user_id = nil
+      comment.save
+    end
     redirect_to users_path, notice: 'User was successfully destroyed.'
    end
   end
