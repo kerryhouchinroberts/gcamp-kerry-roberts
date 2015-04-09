@@ -14,7 +14,7 @@ describe 'User can CRUD projects' do
 
     visit '/projects'
 
-    click_on "New Project"
+    page.find("#new-project-button").click
 
     fill_in 'project_name', :with => "Awesome Project"
 
