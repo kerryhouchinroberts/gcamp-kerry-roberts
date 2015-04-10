@@ -1,10 +1,11 @@
 class TasksController < ApplicationController
 
   layout 'user_layout'
-  
+
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :set_project
   before_action :authenticate
+  before_action :check_membership
   # GET /tasks
   # GET /tasks.json
   def index
@@ -70,6 +71,15 @@ class TasksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
       params.require(:task).permit(:description, :due_date, :completed)
+    end
+
+    def check_membership
+      @project = Project.find(params[:project_id])
+      unless
+        @project.users.include?(User.find_by_id(current_user.id))
+        flash[:alert] = "You do not have access to that project"
+        redirect_to projects_path
+      end
     end
 
     def authenticate

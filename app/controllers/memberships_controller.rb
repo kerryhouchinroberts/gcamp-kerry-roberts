@@ -36,8 +36,13 @@ class MembershipsController < ApplicationController
   def destroy
     @project = Project.find(params[:project_id])
     @membership = Membership.find(params[:id])
-    @membership.destroy
-    redirect_to project_memberships_path(@project), notice: "#{@membership.user.full_name} was successfully removed."
+    if @project.memberships.where(role: 1).count == 1
+      redirect_to :back
+      flash.now[:alert] = "Projects must have at least one owner"
+    else
+      @membership.destroy
+      redirect_to project_memberships_path(@project), notice: "#{@membership.user.full_name} was successfully removed."
+    end
   end
 
   private

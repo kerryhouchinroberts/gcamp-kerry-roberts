@@ -3,6 +3,7 @@ class ProjectsController < ApplicationController
   layout 'user_layout'
 
   before_action :authenticate
+  before_action :check_membership, only: [:show, :edit, :update, :destroy]
 
   def index
     @projects = Project.all
@@ -53,6 +54,15 @@ class ProjectsController < ApplicationController
   private
   def project_params
     params.require(:project).permit(:name)
+  end
+
+  def check_membership
+    @project = Project.find(params[:id])
+    unless
+      @project.users.include?(User.find_by_id(current_user.id))
+      flash[:alert] = "You do not have access to that project"
+      redirect_to projects_path
+    end
   end
 
   def authenticate

@@ -46,6 +46,10 @@
         </div>
     </nav>
 
+    <% if flash[:alert] %>
+      <div class = "alert alert-warning col-md-12"><%= flash.alert %></div>
+    <% end %>
+
   <%= yield %>
   </body>
 </div>

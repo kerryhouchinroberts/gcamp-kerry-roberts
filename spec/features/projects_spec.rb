@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'User can CRUD projects' do
 
   before(:each) do
-    User.create(first_name: 'first', last_name: 'last', email: 'firstlast@email.com', password: 'pass')
+    @user = User.create(first_name: 'first', last_name: 'last', email: 'firstlast@email.com', password: 'pass')
     visit '/sign-in'
     fill_in 'email', :with => 'firstlast@email.com'
     fill_in 'password', :with => 'pass'
@@ -26,6 +26,7 @@ describe 'User can CRUD projects' do
 
   scenario 'User can view a show page for a project' do
     @project = Project.create(name: "Cool Project")
+    Membership.create(project_id: @project.id, user_id: @user.id)
     visit "/projects/#{@project.id}"
 
     expect(page).to have_content @project.name
@@ -33,6 +34,7 @@ describe 'User can CRUD projects' do
 
   scenario 'User can edit a project' do
     @project = Project.create(name: "Cool Project")
+    Membership.create(project_id: @project.id, user_id: @user.id)
 
     visit "/projects/#{@project.id}/edit"
 
@@ -45,6 +47,7 @@ describe 'User can CRUD projects' do
 
   scenario 'User can delete a task' do
     @project = Project.create(name: "Cool Project")
+    Membership.create(project_id: @project.id, user_id: @user.id)
 
     visit "/projects/#{@project.id}"
 

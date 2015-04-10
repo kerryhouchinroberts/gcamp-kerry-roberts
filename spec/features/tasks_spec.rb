@@ -4,7 +4,7 @@ require 'rails_helper'
 describe 'User can CRUD tasks' do
 
   before(:each) do
-    User.create(first_name: 'first', last_name: 'last', email: 'firstlast@email.com', password: 'pass')
+    @user = User.create(first_name: 'first', last_name: 'last', email: 'firstlast@email.com', password: 'pass')
     visit '/sign-in'
     fill_in 'email', :with => 'firstlast@email.com'
     fill_in 'password', :with => 'pass'
@@ -14,6 +14,7 @@ describe 'User can CRUD tasks' do
   before(:each) do
     @project = Project.create(name: "test project")
     @task = Task.create(description: "Cool Task", due_date: "2015-02-18", project_id: @project.id)
+    Membership.create(project_id: @project.id, user_id: @user.id)
   end
 
   scenario 'User can create a task' do
