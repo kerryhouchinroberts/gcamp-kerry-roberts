@@ -25,9 +25,12 @@ class MembershipsController < ApplicationController
   def update
     @project = Project.find(params[:project_id])
     @membership = Membership.find(params[:id])
-    if @membership.update(membership_params)
+    if ((@project.memberships.where(role: 1).count == 1) && (@membership.role == "owner"))
+     redirect_to :back
+     flash[:membership_alert] = "Projects must have at least one owner"
+    elsif @membership.update(membership_params)
       redirect_to project_memberships_path(@project), notice: "#{@membership.user.full_name} was successfully updated."
-    else
+    elsif
       flash.now[:alert] = @membership.errors.full_messages
       render :index
     end
@@ -36,13 +39,8 @@ class MembershipsController < ApplicationController
   def destroy
     @project = Project.find(params[:project_id])
     @membership = Membership.find(params[:id])
-    if @project.memberships.where(role: 1).count == 1
-      redirect_to :back
-      flash.now[:alert] = "Projects must have at least one owner"
-    else
-      @membership.destroy
-      redirect_to project_memberships_path(@project), notice: "#{@membership.user.full_name} was successfully removed."
-    end
+    @membership.destroy
+    redirect_to project_memberships_path(@project), notice: "#{@membership.user.full_name} was successfully removed."
   end
 
   private

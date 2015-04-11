@@ -60,7 +60,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     unless
       @project.users.include?(User.find_by_id(current_user.id))
-      flash[:alert] = "You do not have access to that project"
+      flash[:membership_alert] = "You do not have access to that project"
       redirect_to projects_path
     end
   end

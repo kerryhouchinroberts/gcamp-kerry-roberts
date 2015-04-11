@@ -30,11 +30,14 @@
         </div>
     </nav>
 
-    <% if flash[:alert] %>
-      <div class = "alert alert-warning"><%= flash.alert %></div>
+    <% flash.each do |type, message| %>
+      <% if type == :membership_alert %>
+        <div class="alert alert-danger"><%= flash[:membership_alert] %></div>
+        <% end %>
     <% end %>
 
-  <%= yield %>
+    <%= yield %>
+
   </body>
 </div>
 

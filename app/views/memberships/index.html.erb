@@ -13,7 +13,7 @@
 </ol>
 
 <% if flash.now[:alert] %>
-  <div id="error_explanation" class="alert alert-danger">
+  <div id="error_explanation" class="alert alert-danger small-alert">
     <h4><%= pluralize(@membership.errors.count, "error") %> prohibited this form from being saved:</h4>
     <ul>
       <% @membership.errors.full_messages.each do |message| %>
@@ -41,9 +41,13 @@
     <div class="form-group member">
       <%= f.select(:role, Membership.roles.keys.map {|role| [role.titleize,role]}, {include_blank: false}, {class: "form-control"}) %>
         <%= f.submit "Update", class: "input btn btn-primary" %>
-      <%= link_to '', project_membership_path(@project, member), method: :delete, data: { confirm: 'Are you sure?' }, class: "glyphicon glyphicon-remove" %>
+        <% if @project.memberships.where(role: 1).count == 1 && member.role == "owner"%>
+          You are the last owner
+        <% else %>
+          <%= link_to '', project_membership_path(@project, member), method: :delete, data: { confirm: 'Are you sure?' }, class: "glyphicon glyphicon-remove" %>
+        <% end %>
     </div>
       <% end %>
-      
+
   <% end %>
 </div>
