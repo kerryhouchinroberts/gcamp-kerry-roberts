@@ -37,17 +37,23 @@
       <%= link_to member.user.full_name, user_path(member.user_id) %>
     </div>
 
-    <%= form_for [@project, member], method: :put do |f| %>
-    <div class="form-group member">
-      <%= f.select(:role, Membership.roles.keys.map {|role| [role.titleize,role]}, {include_blank: false}, {class: "form-control"}) %>
-        <%= f.submit "Update", class: "input btn btn-primary" %>
-        <% if @project.memberships.where(role: 1).count == 1 && member.role == "owner"%>
-          You are the last owner
-        <% else %>
-          <%= link_to '', project_membership_path(@project, member), method: :delete, data: { confirm: 'Are you sure?' }, class: "glyphicon glyphicon-remove" %>
+    <% if current_user.memberships.where(project_id: @project.id, role: 1).count == 1 %>
+      <%= form_for [@project, member], method: :put do |f| %>
+      <div class="form-group member">
+        <%= f.select(:role, Membership.roles.keys.map {|role| [role.titleize,role]}, {include_blank: false}, {class: "form-control"}) %>
+          <%= f.submit "Update", class: "input btn btn-primary" %>
+          <% if @project.memberships.where(role: 1).count == 1 && member.role == "owner"%>
+            You are the last owner
+          <% else %>
+            <%= link_to '', project_membership_path(@project, member), method: :delete, data: { confirm: 'Are you sure?' }, class: "glyphicon glyphicon-remove" %>
+          <% end %>
+      </div>
         <% end %>
-    </div>
-      <% end %>
+    <% else %>
+      <div class="row form-group col-md-6 member">
+        <%= member.role%>
+      </div>
+    <% end %>
 
   <% end %>
 </div>
