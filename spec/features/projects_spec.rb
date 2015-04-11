@@ -34,7 +34,7 @@ describe 'User can CRUD projects' do
 
   scenario 'User can edit a project' do
     @project = Project.create(name: "Cool Project")
-    Membership.create(project_id: @project.id, user_id: @user.id)
+    Membership.create(project_id: @project.id, user_id: @user.id, role: 1)
 
     visit "/projects/#{@project.id}/edit"
 
@@ -47,7 +47,7 @@ describe 'User can CRUD projects' do
 
   scenario 'User can delete a task' do
     @project = Project.create(name: "Cool Project")
-    Membership.create(project_id: @project.id, user_id: @user.id)
+    Membership.create(project_id: @project.id, user_id: @user.id, role: 1)
 
     visit "/projects/#{@project.id}"
 
