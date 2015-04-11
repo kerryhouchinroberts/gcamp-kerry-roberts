@@ -4,6 +4,7 @@ class ProjectsController < ApplicationController
 
   before_action :authenticate
   before_action :check_membership, only: [:show, :edit, :update, :destroy]
+  before_action :check_ownership, only: [:edit, :update, :destroy]
 
   def index
     @projects = Project.all
@@ -61,6 +62,15 @@ class ProjectsController < ApplicationController
     unless
       @project.users.include?(User.find_by_id(current_user.id))
       flash[:membership_alert] = "You do not have access to that project"
+      redirect_to projects_path
+    end
+  end
+
+  def check_ownership
+    @project = Project.find(params[:id])
+    unless
+      current_user.memberships.where(project_id: @project.id, role: 1).count == 1
+      flash[:membership_alert] = "You do not have access"
       redirect_to projects_path
     end
   end
