@@ -39,7 +39,8 @@ group :development, :test do
   gem 'capybara'
   gem 'spring-commands-rspec'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+  gem 'pry-byebug'
+  gem 'pry-rails'
   gem 'better_errors'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
