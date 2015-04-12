@@ -47,9 +47,11 @@
     </nav>
 
     <% flash.each do |type, message| %>
-      <% if type == "membership_alert" %>
+      <% if type == "notice" %>
+        <div class="alert alert-success"><%= flash[:notice] %></div>
+      <% elsif type =="membership_alert" %>
         <div class="alert alert-danger"><%= flash[:membership_alert] %></div>
-        <% end %>
+      <% end %>
     <% end %>
 
     <%= yield %>
