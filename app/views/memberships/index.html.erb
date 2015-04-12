@@ -33,7 +33,7 @@
       <%= link_to member.user.full_name, user_path(member.user_id) %>
     </div>
 
-    <% if current_user.memberships.where(project_id: @project.id, role: 1).count == 1 %>
+    <% if current_user.memberships.where(project_id: @project.id, role: 1).count == 1 || current_user.admin? %>
       <%= form_for [@project, member], method: :put do |f| %>
       <div class="form-group member">
         <%= f.select(:role, Membership.roles.keys.map {|role| [role.titleize,role]}, {include_blank: false}, {class: "form-control"}) %>
@@ -48,7 +48,7 @@
     <% else %>
       <div class="row form-group col-md-6 member">
         <%= member.role%>
-          <% if member.user_id == current_user.id%>
+          <% if member.user_id == current_user.id || current_user.admin?%>
             <%= link_to '', project_membership_path(@project, member), method: :delete, data: { confirm: 'Are you sure?' }, class: "glyphicon glyphicon-remove" %>
           <% end %>
       </div>

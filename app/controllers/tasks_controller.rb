@@ -76,8 +76,8 @@ class TasksController < ApplicationController
     def check_membership
       @project = Project.find(params[:project_id])
       unless
-        @project.users.include?(User.find_by_id(current_user.id))
-        flash[:alert] = "You do not have access to that project"
+        (@project.users.include?(User.find_by_id(current_user.id)) || (current_user.admin?))
+        flash[:membership_alert] = "You do not have access to that project"
         redirect_to projects_path
       end
     end

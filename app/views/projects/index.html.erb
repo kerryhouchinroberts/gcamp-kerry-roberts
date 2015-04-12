@@ -14,11 +14,20 @@
   </thead>
 
   <tbody>
+    <% if current_user.admin? %>
+      <% @projects.each do |project| %>
+        <tr>
+          <td><%= link_to project.name, project %></td>
+          <td><%= link_to project.tasks.count, project_tasks_path(project) %></td>
+        </tr>
+      <% end %>
+    <% else %>
       <% current_user.projects.each do |project| %>
         <tr>
           <td><%= link_to project.name, project %></td>
           <td><%= link_to project.tasks.count, project_tasks_path(project) %></td>
         </tr>
       <% end %>
+    <% end %>
   </tbody>
 </table>

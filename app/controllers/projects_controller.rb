@@ -60,7 +60,7 @@ class ProjectsController < ApplicationController
   def check_membership
     @project = Project.find(params[:id])
     unless
-      @project.users.include?(User.find_by_id(current_user.id))
+      ((@project.users.include?(User.find_by_id(current_user.id))) || (current_user.admin?))
       flash[:membership_alert] = "You do not have access to that project"
       redirect_to projects_path
     end

@@ -57,7 +57,7 @@ class MembershipsController < ApplicationController
   def check_membership
     @project = Project.find(params[:project_id])
     unless
-      @project.users.include?(User.find_by_id(current_user.id))
+      ((@project.users.include?(User.find_by_id(current_user.id))) || (current_user.admin?))
       flash[:membership_alert] = "You do not have access to that project"
       redirect_to projects_path
     end
@@ -73,7 +73,7 @@ class MembershipsController < ApplicationController
   def check_ownership
     @project = Project.find(params[:project_id])
     unless
-      (current_user.memberships.where(project_id: @project.id, role: 1).count == 1) || (@project.memberships.where(user_id: current_user.id))
+      (current_user.memberships.where(project_id: @project.id, role: 1).count == 1) || (@project.memberships.where(user_id: current_user.id) || (current_user.admin?))
       flash[:membership_alert] = "You do not have access"
       redirect_to projects_path
     end
