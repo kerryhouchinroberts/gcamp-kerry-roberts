@@ -17,7 +17,7 @@
   <dd><%= @user.first_name %></dd>
   <dt>Last Name</dt>
   <dd><%= @user.last_name %></dd>
-  <% if @user.id == current_user.id %>
+  <% if @user.id == current_user.id || (((@user.memberships.map {|m| m.project_id}) & (current_user.memberships.map {|m| m.project_id})).count >= 1) || current_user.admin? %>
     <dt>Email</dt>
     <dd><%= mail_to(@user.email) %></dd>
   <% end %>

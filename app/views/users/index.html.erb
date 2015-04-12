@@ -17,7 +17,7 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= link_to user.full_name, user %></td>
-        <% if user.id == current_user.id %>
+        <% if (user.id == current_user.id) || (((user.memberships.map {|m| m.project_id}) & (current_user.memberships.map {|m| m.project_id})).count >= 1) || current_user.admin?  %>
           <td><%= mail_to(user.email) %></td>
         <% else %>
           <td></td>
