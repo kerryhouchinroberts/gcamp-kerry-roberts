@@ -4,7 +4,7 @@ class MembershipsController < ApplicationController
 
   before_action :authenticate
   before_action :check_membership
-  before_action :check_ownership, only: [:edit, :update, :destroy]
+  before_action :check_ownership, only: [:update, :destroy]
 
   def index
     @memberships = Membership.all
