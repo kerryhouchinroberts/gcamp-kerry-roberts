@@ -52,6 +52,9 @@
     <% else %>
       <div class="row form-group col-md-6 member">
         <%= member.role%>
+          <% if member.user_id == current_user.id%>
+            <%= link_to '', project_membership_path(@project, member), method: :delete, data: { confirm: 'Are you sure?' }, class: "glyphicon glyphicon-remove" %>
+          <% end %>
       </div>
     <% end %>
 
