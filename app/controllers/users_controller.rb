@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   layout 'user_layout'
 
   before_action :authenticate
+  before_action :authorize, only: [:edit]
 
   def index
     @users = User.all
@@ -44,7 +45,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-   if  @user.destroy
+    if @user.destroy
     @user.comments.map do |comment|
       comment.user_id = nil
       comment.save
@@ -62,6 +63,12 @@ class UsersController < ApplicationController
     unless current_user
       session[:return_to] = request.fullpath
       redirect_to '/sign-in'
+    end
+  end
+
+  def authorize
+    unless (User.find(params[:id]).id == current_user.id) || (current_user.admin?)
+      raise AccessDenied
     end
   end
 
