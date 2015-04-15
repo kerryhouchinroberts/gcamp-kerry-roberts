@@ -28,7 +28,7 @@ class MembershipsController < ApplicationController
     @project = Project.find(params[:project_id])
     @membership = Membership.find(params[:id])
     if ((@project.memberships.where(role: 1).count == 1) && (@membership.role == "owner"))
-     redirect_to :back
+      redirect_to project_memberships_path(@project)
      flash[:membership_alert] = "Projects must have at least one owner"
     elsif @membership.update(membership_params)
       redirect_to project_memberships_path(@project), notice: "#{@membership.user.full_name} was successfully updated."
@@ -73,7 +73,7 @@ class MembershipsController < ApplicationController
   def check_ownership
     @project = Project.find(params[:project_id])
     unless
-      (current_user.memberships.where(project_id: @project.id, role: 1).count == 1) || (@project.memberships.where(user_id: current_user.id) || (current_user.admin?))
+      ((current_user.memberships.where(project_id: @project.id, role: 1).count == 1) || (current_user.admin?))
       flash[:membership_alert] = "You do not have access"
       redirect_to projects_path
     end
