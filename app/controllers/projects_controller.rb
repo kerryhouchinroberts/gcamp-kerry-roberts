@@ -69,7 +69,7 @@ class ProjectsController < ApplicationController
   def check_ownership
     @project = Project.find(params[:id])
     unless
-      current_user.memberships.where(project_id: @project.id, role: 1).count == 1
+      current_user.memberships.where(project_id: @project.id, role: 1).count == 1 || current_user.admin?
       flash[:membership_alert] = "You do not have access"
       redirect_to projects_path
     end
