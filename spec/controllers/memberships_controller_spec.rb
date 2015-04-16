@@ -55,7 +55,7 @@ describe MembershipsController, type: :controller do
   end
 
   describe "#update" do
-    it "redirects non project-owners to the projects index when trying to update memberhsips" do
+    it "redirects non project-owners to the projects index when trying to update memberships" do
       @project = Project.create(name: "name")
       @user = User.create(first_name: 'first', last_name: 'last', email: 'firstlast@email.com', password: 'pass', admin: false)
       @membership = Membership.create(user_id: @user.id, project_id: @project.id, role: "member")
