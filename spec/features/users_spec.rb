@@ -41,7 +41,6 @@ describe 'User can CRUD users' do
     scenario 'User can edit a user' do
 
       visit "/users/#{@user.id}/edit"
-
       fill_in 'user_first_name', :with => "Kerry"
       fill_in 'user_last_name', :with => "Roberts"
       fill_in 'user_email', :with => "email@example.com"
