@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   layout 'user_layout'
 
   before_action :authenticate
-  before_action :authorize, only: [:edit]
+  before_action :authorize, only: [:edit, :update, :destroy]
 
   def index
     @users = User.all
