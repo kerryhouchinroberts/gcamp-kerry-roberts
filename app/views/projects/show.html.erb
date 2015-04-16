@@ -21,7 +21,7 @@
   <%= link_to "#{@project.memberships.count} Member".pluralize(@project.memberships.count), project_memberships_path(@project) %>
 </div>
 
-<% if current_user.memberships.where(project_id: @project.id, role: 1).count == 1 %>
+<% if current_user.memberships.where(project_id: @project.id, role: 1).count == 1 || current_user.admin? %>
   <div class="well">
     <h4>Delete Project</h4>
     <p>Deleting this project will also delete <%= pluralize(@project.memberships.count, "membership") %>, <%= pluralize(@project.tasks.count, "task") %> and associated comments.</p>
