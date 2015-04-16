@@ -19,14 +19,16 @@
   </div>
 <% end %>
 
-<div class="well form-inline col-md-8">
-  <%= form_for([@project, @membership]) do |f| %>
-    <%= f.collection_select(:user_id, User.all, :id, :full_name, {include_blank: "Please select a user..."},{class: "form-control"}) %>
-    <%= f.select(:role, Membership.roles.keys.map {|role| [role.titleize,role]}, {include_blank: false}, {class: "form-control"}) %>
-    <%= f.submit "Add New Member", class: "input btn btn-primary" %>
-  <% end %>
-</div>
-
+<% if current_user.memberships.where(project_id: @project.id, role: 1).count == 1 || current_user.admin? %>
+  <div class="well form-inline col-md-8">
+    <%= form_for([@project, @membership]) do |f| %>
+      <%= f.collection_select(:user_id, User.all, :id, :full_name, {include_blank: "Please select a user..."},{class: "form-control"}) %>
+      <%= f.select(:role, Membership.roles.keys.map {|role| [role.titleize,role]}, {include_blank: false}, {class: "form-control"}) %>
+      <%= f.submit "Add New Member", class: "input btn btn-primary" %>
+    <% end %>
+  </div>
+<% end%>
+  
 <div class="row form-inline col-md-8">
   <% @project.memberships.each do |member| %>
     <div class="row form-group col-md-6 member">
