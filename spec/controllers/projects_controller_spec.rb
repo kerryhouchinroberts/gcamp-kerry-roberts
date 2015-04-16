@@ -78,16 +78,6 @@ describe ProjectsController, type: :controller do
     end
   end
 
-  describe "#create" do
-    it "creates a membership, also, and adds the current user as an owner to any project they create" do
-      user = User.create!(first_name: 'first', last_name: 'last', email: 'firstlast@email.com', password: 'pass')
-      project = Project.create!(name: "project that the user owns")
-      session[:user_id] = user.id
-      post :create, {id: project.id, :project => {name: "project that the user owns"}}
-      expect(user.memberships.last.role).to eq("owner")
-    end
-  end
-
   describe "#update" do
     it "allows project owners to update projects" do
       user = User.create!(first_name: 'first', last_name: 'last', email: 'firstlast@email.com', password: 'pass')
